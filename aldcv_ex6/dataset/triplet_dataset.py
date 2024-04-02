@@ -27,8 +27,10 @@ class TripletDataset(Dataset):
         # Make sure you understand the __init__ function and the structure of the data first.
 
         # TASK 1: Read the triplet and make sure you use the self.transform
-        frame_1 = ...
-        frame_2 = ...
-        frame_3 = ...
+        #print(os.path.join(self.triplets_path, current_path, '1.png'))
+
+        frame_1 = self.transform(Image.open(os.path.join(self.triplets_path, current_path, '1.png')))
+        frame_2 = self.transform(Image.open(os.path.join(self.triplets_path, current_path, '2.png')))
+        frame_3 = self.transform(Image.open(os.path.join(self.triplets_path, current_path, '3.png')))
 
         return frame_1, frame_2, frame_3

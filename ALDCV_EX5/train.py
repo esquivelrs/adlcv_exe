@@ -75,6 +75,7 @@ def main(scene_name):
     models_path = os.path.join('models', para['expname'])
     os.makedirs(videos_path, exist_ok=True)
     os.makedirs(models_path, exist_ok=True)
+    mse = torch.nn.MSELoss()
 
     pbar = tqdm(range(para['n_iters']))
     best_psnr = -1
@@ -108,10 +109,11 @@ def main(scene_name):
 
         rgb_predicted = outputs['rgb_map']
         # TASK 5: training loop
-        loss = ... #HINT: MSE betweein rgb_predicted and target_img 
-        ... #HINT: zero gradient
-        ... #HINT: loss backward
-        ... #HINT optimizer step
+        loss = mse(rgb_predicted, target_img) #HINT: MSE betweein rgb_predicted and target_img 
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
         psnr = -10. * torch.log10(loss)
         pbar.set_postfix(MSE=loss.item(), PSNR=psnr.item())

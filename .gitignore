@@ -3,3 +3,10 @@
 data
 .data
 *.pdf
+*.pth
+*/results
+*/.results
+results
+.results
+
+
